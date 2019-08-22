@@ -13,8 +13,8 @@
 可以运行下面命令开启服务
 
 ```shell
-## 这里的模型路径根据自己的位置改
-MODEL_DIR=/container_data/fairseq/checkpoints/transformer_for_page
+## 这里的模型在ftp://172.17.82.23/sharefolder_for_newer/许海明/TRFDBS模型参数
+MODEL_DIR=/container_data/fairseq/checkpoints/transformer_for_page 
 page-serving-start \
 --path=$MODEL_DIR/model_avg.pt \
 --beam 10  \
