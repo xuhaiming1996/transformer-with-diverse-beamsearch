@@ -1,0 +1,75 @@
+### 前期数据准备
+    使用结巴已经分好词的句子，每一行为一个句子
+        train.sens.src
+        train.sens.tgt
+        test.sens.src
+        test.sens.tgt
+
+    cd examples/paraphrase
+    bash prepare-bdzd.sh
+
+
+##  这是训练数据准备处理
+
+    TEXT=examples/paraphrase/bdzd.tokenized.src-tgt
+
+
+    fairseq-preprocess \
+      --source-lang src \
+      --target-lang tgt \
+      --trainpref $TEXT/train\
+      --validpref $TEXT/test \
+      --testpref $TEXT/test \
+      --workers 40 \
+      --destdir data-bin/bdzd.tokenized.src-tgt \
+      --joined-dictionary \
+
+
+
+##  这是训练的命令
+开始翻译任务，使用的模型是 transformer
+mkdir -p checkpoints/transformer_for_page
+CUDA_VISIBLE_DEVICES=1 fairseq-train data-bin/bdzd.tokenized.src-tgt \
+  -a transformer \
+  --optimizer adam \
+  --lr 0.0005 \
+  -s src \
+  -t tgt \
+  --label-smoothing 0.1 \
+  --dropout 0.3 \
+  --max-tokens 4000 \
+  --lr-scheduler inverse_sqrt \
+  --weight-decay 0.0001 \
+  --criterion label_smoothed_cross_entropy \
+  --warmup-updates 4000 \
+  --warmup-init-lr '1e-07' \
+  --adam-betas '(0.9, 0.98)' \
+  --save-dir checkpoints/transformer_for_page \
+  --max-epoch 20 \
+  --save-interval-updates 20000 \
+  --share-all-embeddings
+
+
+
+
+##
+BPEROOT=examples/paraphrase/subword-nmt/
+$ BPE_CODE=examples/paraphrase/bazd.tokenized.src-tgt/code
+
+
+
+fairseq-generate data-bin/bdzd.tokenized.src-tgt \
+  --path checkpoints/transformer_for_page/model.pt \
+  --batch-size 128 \
+   --beam 10 \
+   --diverse-beam-groups  5
+   --remove-bpe
+
+
+MODEL_DIR=checkpoints/transformer_for_page
+fairseq-interactive --path $MODEL_DIR/model_avg.pt  $MODEL_DIR \
+--beam 10  --source-lang src --target-lang tgt \
+--tokenizer moses --bpe subword_nmt \
+--bpe-codes $MODEL_DIR/code \
+--nbest=40 --moses-source-lang "zh" --moses-target-lang "zh" --diverse-beam-groups 5  \
+--diverse-beam-strength=0.9
