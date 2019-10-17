@@ -7,7 +7,7 @@
 
 ## 模型结构图
 模型结构图
-![image](https://gitdojo.gz.cvte.cn/xuhaiming/btla/blob/master/model.png)
+![image](https://github.com/xuhaiming1996/transformer-with-diverse-beamsearch/blob/master/model.png)
 
 可以运行下面命令开启服务
 
