@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData">
+    <serverData>
+      <paths name="page-as-service">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/container_data/page-as-service" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="page-transformer-as-service">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/container_data/page-transformer-diverse-as-service" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

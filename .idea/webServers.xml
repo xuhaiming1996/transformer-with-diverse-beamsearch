@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="023585e5-97f7-4d26-ad62-16c3186c7bcb" name="page-as-service" url="http://172.17.84.211">
+        <fileTransfer host="172.17.84.211" port="8071" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="8071" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="ea803203-174e-48d1-92ce-9082468cfa11" name="page-transformer-as-service" url="http://172.17.84.211">
+        <fileTransfer host="172.17.84.211" port="8071" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="8071" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
