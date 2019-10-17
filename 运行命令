@@ -2,7 +2,7 @@
 
 
 ## Introduction
-这是一个复述生成的模型代码,已封装成类似 bert-as-service的服形式
+这是一个复述生成的模型代码,已封装成类似 bert-as-service的服形式，如果需要自己训练可以看下这里的代码，进行适当的修改/server/bert_serving/server/page
 
 
 ## 模型结构图
@@ -13,7 +13,7 @@
 
 ```shell
 
-MODEL_DIR=/container_data/fairseq/checkpoints/transformer_for_page
+MODEL_DIR="模型路径"
 page-serving-start \
 --path=$MODEL_DIR/model_avg.pt \ $MODEL_DIR
 --beam 10  \
